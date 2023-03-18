@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Data</title>
+    <script src="Datamahasiswa.html"></script>
+</head>
+
+<body>
+    <script>
+
+        function splitgender(arr) {
+            //olah data berdasarkan gender
+            const malemhs = mahasiswa.filter(getmalemhs);
+            const femalemhs = mahasiswa.filter(getfemalemhs);
+
+            function getmalemhs(value, index, array) {
+                return value.gender == "M";
+            }
+
+            function getfemalemhs(value, index, array) {
+                return value.gender == "F";
+            }
+
+            //mencari banyaknya data dari masing masing gender
+            const malemhscount = malemhs.length;
+            const femalemhscount = femalemhs.length;
+
+
+            //olah nilai
+
+            const malemhsscore = malemhs.map(getmalemhsscore);
+            const femalemhsscore = femalemhs.map(getfemalemhsscore);
+
+            function getmalemhsscore(value) {
+                return value.score;
+            }
+            function getfemalemhsscore(value) {
+                return value.score;
+            }
+
+            //penjumlahan male
+            const summalevalue = malemhsscore.reduce(summale, 0);
+
+            function summale(total, value) {
+                return total + value;
+            }
+
+            //pembagian (average) male
+            const malemhsavg = summalevalue / malemhsscore.length;
+
+            // max and min male
+            maxmalevalue = Math.max(...malemhsscore);
+            minmalevalue = Math.min(...malemhsscore);
+
+
+
+            //penjumlahan female
+            const sumfemalevalue = femalemhsscore.reduce(sumfemale, 0);
+
+            function sumfemale(total, value) {
+                return total + value;
+            }
+
+            //pembagian (average) female
+            const femalemhsavg = sumfemalevalue / femalemhsscore.length;
+
+            // max and min male
+            maxfemalevalue = Math.max(...femalemhsscore);
+            minfemalevalue = Math.min(...femalemhsscore);
+
+
+            //hasil akh
+            const result = {
+                female: {
+                    count: femalemhscount,
+
+                    score: {
+                        average: femalemhsavg,
+                        max: maxfemalevalue,
+                        min: minfemalevalue,
+                    },
+
+                    students: {
+                        femalemhs
+                    }
+                },
+                male: {
+                    count: malemhscount,
+
+                    score: {
+                        average: malemhsavg,
+                        max: maxmalevalue,
+                        min: minmalevalue,
+                    },
+
+                    students: {
+                        malemhs
+
+                    }
+                }
+            }
+
+            return result;
+        }
+
+
+        const hasilakh = splitgender(mahasiswa);
+        console.log(hasilakh);
+    </script>
+</body>
+
+</html>
